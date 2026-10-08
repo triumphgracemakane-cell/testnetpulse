@@ -31,7 +31,7 @@ const transporter = nodemailer.createTransport({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname)));
 
 // Register Route with Account Type & Duplicate Protection
 app.post('/api/register', async (req, res) => {
