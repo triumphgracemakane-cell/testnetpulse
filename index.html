@@ -3,196 +3,272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NetPulse — Real-Time Network Health Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>NetPulse - Real-Time Network Health Monitoring</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body, html { width: 100%; height: 100%; color: #0f172a; background-color: #f8fafc; overflow-x: hidden; }
-        
-        /* Hero Section with background.jpg */
-        .hero {
-            position: relative;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            min-height: 100vh;
+        }
+        .view {
+            display: none;
             width: 100%;
-            height: 100vh;
-            background: linear-gradient(135deg, rgba(248, 250, 252, 0.92) 0%, rgba(241, 245, 249, 0.96) 100%), url('/images/background.jpg') no-repeat center center/cover;
+            min-height: 100vh;
+        }
+        .view.active {
+            display: block;
+        }
+        /* Landing View Style */
+        #home-view {
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('background.jpg') no-repeat center center/cover;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 2rem 5%;
+            padding: 40px;
         }
-
-        nav {
+        header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
-            max-width: 1300px;
-            margin: 0 auto;
         }
-
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            color: #0284c7;
+        .logo-container {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
-
-        .logo span { color: #0f172a; }
-
-        .nav-btns {
-            display: flex;
-            gap: 15px;
-        }
-
-        .btn {
-            padding: 10px 22px;
+        .logo-container img {
+            height: 40px;
+            width: 40px;
             border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.2s ease;
+            object-fit: cover;
         }
-
-        .btn-outline {
-            border: 1px solid #cbd5e1;
-            color: #0f172a;
-            background: #ffffff;
+        .logo-container span {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #38bdf8;
         }
-        .btn-outline:hover { background: #f1f5f9; border-color: #94a3b8; }
-
-        .btn-solid {
-            background: #0284c7;
-            color: #fff;
-            border: none;
-        }
-        .btn-solid:hover { background: #0369a1; }
-
         .hero-content {
-            max-width: 800px;
+            max-width: 650px;
             margin: auto;
             text-align: center;
         }
-
-        .badge {
-            display: inline-block;
-            padding: 6px 14px;
-            background: #e0f2fe;
-            color: #0284c7;
-            border: 1px solid #bae6fd;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
         .hero-content h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            line-height: 1.2;
+            font-size: 3rem;
             margin-bottom: 20px;
-            letter-spacing: -1px;
-            color: #0f172a;
+            color: #f8fafc;
         }
-
         .hero-content p {
-            font-size: 1.15rem;
-            color: #475569;
-            margin-bottom: 35px;
+            font-size: 1.1rem;
+            color: #94a3b8;
+            margin-bottom: 30px;
             line-height: 1.6;
         }
-
-        .hero-cta {
+        .btn {
+            background-color: #0284c7;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background-color: #0369a1;
+        }
+        /* Auth View Style */
+        .auth-container {
             display: flex;
-            gap: 20px;
             justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #0f172a;
+            padding: 20px;
         }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            max-width: 1300px;
-            margin: -80px auto 80px auto;
-            padding: 0 5%;
-            position: relative;
-            z-index: 10;
-        }
-
-        .feature-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
+        .auth-card {
+            background: #1e293b;
+            padding: 40px;
             border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            border: 1px solid #334155;
         }
-
-        .feature-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 12px;
-            color: #0f172a;
-        }
-
-        .feature-card p {
-            color: #64748b;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        footer {
+        .auth-card h2 {
+            margin-bottom: 24px;
+            color: #f8fafc;
             text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px 14px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            color: white;
+            font-size: 1rem;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #0284c7;
+        }
+        .auth-card button {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 16px;
+            color: #38bdf8;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        /* Dashboard View Style */
+        #dashboard-view {
             padding: 30px;
-            color: #64748b;
-            font-size: 0.85rem;
-            border-top: 1px solid #e2e8f0;
-            background: #ffffff;
+            background-color: #0f172a;
+        }
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .metric-card {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+        }
+        .metric-card h3 {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        .metric-card .value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #38bdf8;
         }
     </style>
 </head>
 <body>
 
-    <div class="hero">
-        <nav>
-            <div class="logo">⚡ Net<span>Pulse</span></div>
-            <div class="nav-btns">
-                <a href="login.html" class="btn btn-outline">Login</a>
-                <a href="register.html" class="btn btn-solid">Request Account</a>
+    <!-- HOME / LANDING VIEW -->
+    <div id="home-view" class="view active">
+        <header>
+            <div class="logo-container">
+                <img src="logo.jpg" alt="NetPulse Logo">
+                <span>NetPulse</span>
             </div>
-        </nav>
-
+            <button class="btn" onclick="switchView('login-view')">Sign In</button>
+        </header>
         <div class="hero-content">
-            <div class="badge">Final Defense Ready • 100% Real-Time Telemetry</div>
-            <h1>Enterprise Network Health & Telemetry Intelligence</h1>
-            <p>Uncompromising live monitoring for CPU, RAM, Bandwidth, Disk I/O, Services uptime, and predictive AI anomaly detection with granular Role-Based Access Control.</p>
-            <div class="hero-cta">
-                <a href="register.html" class="btn btn-solid" style="padding: 14px 30px; font-size: 1rem;">Get Started</a>
-                <a href="login.html" class="btn btn-outline" style="padding: 14px 30px; font-size: 1rem;">System Login</a>
+            <h1>Real-Time Network Health Monitoring</h1>
+            <p>Enterprise-grade telemetry tracking, role-based access control, and dynamic diagnostics designed for resilient infrastructure management.</p>
+            <button class="btn" onclick="switchView('login-view')">Get Started</button>
+        </div>
+        <footer></footer>
+    </div>
+
+    <!-- LOGIN / AUTH VIEW -->
+    <div id="login-view" class="view">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <img src="logo.jpg" alt="Logo" style="height: 50px; width: 50px; border-radius: 50%; object-fit: cover;">
+                </div>
+                <h2>Sign In to NetPulse</h2>
+                <form id="login-form" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" required placeholder="admin@netpulse.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn">Access Dashboard</button>
+                </form>
+                <a href="#" class="back-link" onclick="switchView('home-view')">&larr; Back to Home</a>
             </div>
         </div>
-        <div></div>
     </div>
 
-    <div class="features-grid">
-        <div class="feature-card">
-            <h3>🔴 Zero Mock Data Engine</h3>
-            <p>Directly hooked into Node.js OS core modules and real round-robin ping probes to Google, Cloudflare, and custom endpoints.</p>
+    <!-- DASHBOARD VIEW -->
+    <div id="dashboard-view" class="view">
+        <div class="dashboard-header">
+            <div class="logo-container">
+                <img src="logo.jpg" alt="Logo">
+                <span>NetPulse Dashboard</span>
+            </div>
+            <button class="btn" style="background-color: #ef4444;" onclick="switchView('home-view')">Logout</button>
         </div>
-        <div class="feature-card">
-            <h3>👥 4+ Tier RBAC & Approvals</h3>
-            <p>Super Admin and dual Deputy Admin governance workflow. Account requests remain pending until explicitly authorized.</p>
-        </div>
-        <div class="feature-card">
-            <h3>📈 Post-Incident History & PDF</h3>
-            <p>Filter custom historical intervals (24h, 7d, 30d) and instantly export professional audit reports via jsPDF.</p>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <h3>System Status</h3>
+                <div class="value" style="color: #22c55e;">Operational</div>
+            </div>
+            <div class="metric-card">
+                <h3>Active Telemetry Nodes</h3>
+                <div class="value">24 / 24</div>
+            </div>
+            <div class="metric-card">
+                <h3>Average Latency</h3>
+                <div class="value">14.2 ms</div>
+            </div>
+            <div class="metric-card">
+                <h3>Packet Loss Rate</h3>
+                <div class="value">0.02%</div>
+            </div>
         </div>
     </div>
 
-    <footer>
-        &copy; 2026 NetPulse Network Operations Center. All rights reserved.
-    </footer>
+    <script>
+        function switchView(viewId) {
+            document.querySelectorAll('.view').forEach(view => {
+                view.classList.remove('active');
+            });
+            const target = document.getElementById(viewId);
+            if (target) {
+                target.classList.add('active');
+            }
+        }
 
+        function handleLogin(event) {
+            event.preventDefault();
+            // Connect to your backend API or authenticate here.
+            // For now, toggles directly into the dashboard view:
+            switchView('dashboard-view');
+        }
+    </script>
 </body>
 </html>
