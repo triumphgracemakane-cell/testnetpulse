@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetPulse — Real-Time Network Health Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body, html { width: 100%; height: 100%; color: #0f172a; background-color: #f8fafc; overflow-x: hidden; }
+        
+        /* Hero Section with background.jpg */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(248, 250, 252, 0.92) 0%, rgba(241, 245, 249, 0.96) 100%), url('/images/background.jpg') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 2rem 5%;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #0284c7;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span { color: #0f172a; }
+
+        .nav-btns {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-outline {
+            border: 1px solid #cbd5e1;
+            color: #0f172a;
+            background: #ffffff;
+        }
+        .btn-outline:hover { background: #f1f5f9; border-color: #94a3b8; }
+
+        .btn-solid {
+            background: #0284c7;
+            color: #fff;
+            border: none;
+        }
+        .btn-solid:hover { background: #0369a1; }
+
+        .hero-content {
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #e0f2fe;
+            color: #0284c7;
+            border: 1px solid #bae6fd;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            color: #0f172a;
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            color: #475569;
+            margin-bottom: 35px;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1300px;
+            margin: -80px auto 80px auto;
+            padding: 0 5%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: #0f172a;
+        }
+
+        .feature-card p {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #64748b;
+            font-size: 0.85rem;
+            border-top: 1px solid #e2e8f0;
+            background: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <nav>
+            <div class="logo">⚡ Net<span>Pulse</span></div>
+            <div class="nav-btns">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-solid">Request Account</a>
+            </div>
+        </nav>
+
+        <div class="hero-content">
+            <div class="badge">Final Defense Ready • 100% Real-Time Telemetry</div>
+            <h1>Enterprise Network Health & Telemetry Intelligence</h1>
+            <p>Uncompromising live monitoring for CPU, RAM, Bandwidth, Disk I/O, Services uptime, and predictive AI anomaly detection with granular Role-Based Access Control.</p>
+            <div class="hero-cta">
+                <a href="register.html" class="btn btn-solid" style="padding: 14px 30px; font-size: 1rem;">Get Started</a>
+                <a href="login.html" class="btn btn-outline" style="padding: 14px 30px; font-size: 1rem;">System Login</a>
+            </div>
+        </div>
+        <div></div>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-card">
+            <h3>🔴 Zero Mock Data Engine</h3>
+            <p>Directly hooked into Node.js OS core modules and real round-robin ping probes to Google, Cloudflare, and custom endpoints.</p>
+        </div>
+        <div class="feature-card">
+            <h3>👥 4+ Tier RBAC & Approvals</h3>
+            <p>Super Admin and dual Deputy Admin governance workflow. Account requests remain pending until explicitly authorized.</p>
+        </div>
+        <div class="feature-card">
+            <h3>📈 Post-Incident History & PDF</h3>
+            <p>Filter custom historical intervals (24h, 7d, 30d) and instantly export professional audit reports via jsPDF.</p>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 NetPulse Network Operations Center. All rights reserved.
+    </footer>
+
+</body>
+</html>
